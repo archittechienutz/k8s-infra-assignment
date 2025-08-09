@@ -1,0 +1,4 @@
+# --- Overrides for Signoz k8s-infra chart ---
+# Change to your TrueNAS IP if different
+otelCollectorEndpoint: "http://10.172.27.16:4318"
+clusterName: "k3s-ubuntu2204"

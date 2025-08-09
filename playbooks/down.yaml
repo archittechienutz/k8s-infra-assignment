@@ -1,0 +1,8 @@
+---
+- name: Uninstall K8S Infra Helm Chart
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Uninstall k8s-infra
+      ansible.builtin.command: helm uninstall k8s-infra -n platform
+      ignore_errors: true

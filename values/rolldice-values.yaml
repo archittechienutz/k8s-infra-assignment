@@ -1,0 +1,7 @@
+image:
+  repository: rolldice
+  tag: "2.0"
+
+env:
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "http://10.172.27.16:4318"

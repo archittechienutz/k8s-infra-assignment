@@ -1,0 +1,25 @@
+---
+- name: Install K8S Infra Helm Chart (forward to SigNoz)
+  hosts: all
+  gather_facts: false
+  vars:
+    values_file: "{{ playbook_dir }}/../values/k8s-infra-values.yaml"
+  tasks:
+    - name: Add SigNoz Helm repo
+      ansible.builtin.command: helm repo add signoz https://charts.signoz.io
+      register: addrepo
+      changed_when: "'already exists' not in addrepo.stdout"
+      ignore_errors: true
+
+    - name: Update Helm repos
+      ansible.builtin.command: helm repo update
+
+    - name: Ensure namespace exists
+      ansible.builtin.command: kubectl get ns platform || kubectl create ns platform
+
+    - name: Install/upgrade k8s-infra chart
+      ansible.builtin.command: >
+        helm upgrade --install k8s-infra signoz/k8s-infra
+        -n platform
+        --create-namespace
+        -f {{ values_file }}

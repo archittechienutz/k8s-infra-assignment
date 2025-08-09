@@ -1,0 +1,20 @@
+# ---- Example values override for "k8s-infra" chart ----
+upstream:
+  # HTTP OTLP endpoint of your SigNoz (running on TrueNAS)
+  otlpEndpoint: "{{ upstream_otlp_endpoint }}"
+  protocol: "http"        # http OR grpc; using http for :4318
+  insecure: true          # if not using TLS on TrueNAS
+
+signals:
+  traces:  {{ enable_traces | default(true) | to_json }}
+  metrics: {{ enable_metrics | default(true) | to_json }}
+  logs:    {{ enable_logs | default(true) | to_json }}
+
+# If the chart exposes per-signal toggles or env, set them here as needed.
+# For example (names differ by chart!):
+# agent:
+#   extraEnv:
+#     - name: OTEL_EXPORTER_OTLP_ENDPOINT
+#       value: "{{ upstream_otlp_endpoint }}"
+#     - name: OTEL_EXPORTER_OTLP_PROTOCOL
+#       value: "http/protobuf"

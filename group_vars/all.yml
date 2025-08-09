@@ -1,0 +1,21 @@
+# --- kube access ---
+kubeconfig: "/home/ubuntu/.kube/config"   # <- edit if different
+k8s_namespace: "signoz-infra"             # where we'll install the chart
+
+# --- Helm chart info ---
+# If your class gave you a specific repo for the k8s-infra chart,
+# put it here; otherwise keep placeholders and adjust later.
+helm_repo_name: "k8s-infra-repo"
+helm_repo_url:  "https://example.com/helm"     # <- CHANGE to your real repo
+helm_release:   "k8s-infra"
+helm_chart:     "k8s-infra"                     # chart name inside the repo
+helm_version:   ""                              # pin if you need to, else leave empty
+
+# --- Where to send OTLP from cluster to SigNoz (TrueNAS) ---
+# Use the TrueNAS host IP and SigNoz OTLP HTTP receiver (4318)
+upstream_otlp_endpoint: "http://10.172.27.43:4318"  # <- CHANGE to your TrueNAS IP
+
+# Optional toggles (depends on your chart's schema)
+enable_traces:  true
+enable_metrics: true
+enable_logs:    true
