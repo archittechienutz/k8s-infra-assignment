@@ -1,0 +1,13 @@
+# kube & k3s configs / secrets
+.kube/
+**/k3s.yaml
+*.key
+*.crt
+*.pem
+
+# noise
+*.log
+*.retry
+.vscode/
+.idea/
+.DS_Store
